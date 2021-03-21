@@ -282,7 +282,7 @@ note = [
     )
 
     # Ensure that the item requests are valid with
-    # the valid `item_id
+    # the valid `item_id`
     item_requests = Array.new(Faker::Number.within(range: 5..15)) do
       item = Item.all.sample
 
@@ -314,6 +314,17 @@ inv_pdxdb = StorageLocation.find_or_create_by!(name: "Pawnee Main Bank (Office)"
   inventory.organization = pdx_org
   inventory.warehouse_type = StorageLocation::WAREHOUSE_TYPES[1]
   inventory.square_footage = 20_000
+end
+
+# Populate all storage locations with identical item sets
+StorageLocation.all.each do |sl|
+  Item.all.each do |item|
+    InventoryItem.create!(
+      storage_location: sl,
+      item: item,
+      quantity: Faker::Number.within(range: 100..2000)
+    )
+  end
 end
 
 # ----------------------------------------------------------------------------
@@ -496,13 +507,20 @@ end
 # Requests
 # ----------------------------------------------------------------------------
 
+
+pdx_item_ids = Item.where(organization: pdx_org).pluck(:id)
+
 20.times.each do |count|
   status = count > 15 ? 'fulfilled' : 'pending'
+
+  Item.where(organization: pdx_org).pluck(:id).sample
   Request.create(
     partner: random_record_for_org(pdx_org, Partner),
     organization: pdx_org,
-    request_items: [{ "item_id" => Item.all.pluck(:id).sample, "quantity" => 3 },
-                    { "item_id" => Item.all.pluck(:id).sample, "quantity" => 2 }],
+    request_items: [
+      { "item_id" => pdx_item_ids.sample, "quantity" => Faker::Number.within(range: 1..5) },
+      { "item_id" => pdx_item_ids.sample, "quantity" => Faker::Number.within(range: 1..5) }
+    ],
     comments: "Urgent",
     status: status
   )

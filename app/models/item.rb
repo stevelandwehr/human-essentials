@@ -20,6 +20,12 @@
 #  organization_id              :integer
 #
 
+
+#
+# This is probably better to be named as OrganizationItem rather than
+# just Item. This because this isn't just a item but rather a Item's configuration
+# for a organization.
+#
 class Item < ApplicationRecord
   include Filterable
   include Exportable

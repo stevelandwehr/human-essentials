@@ -104,6 +104,7 @@ class Distribution < ApplicationRecord
     self.partner_id = request.partner_id
     self.comment = request.comments
     self.issued_at = Time.zone.today + 1.day
+
     request.request_items.each do |item|
       line_items.new(
         quantity: item["quantity"],
