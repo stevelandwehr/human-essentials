@@ -255,7 +255,7 @@ note = [
     end
 
     family.home_young_child_count.times do
-      Partners::Child.create!(
+      child = Partners::Child.create!(
         family: family,
         first_name: Faker::Name.first_name,
         last_name: family.guardian_last_name,
@@ -270,6 +270,33 @@ note = [
         archived: false,
         item_needed_diaperid: Partners::Child::CHILD_ITEMS.sample
       )
+
+
+      item_requests = Array.new(Faker::Number.within(range: 1..3)) do
+        pr = Partners::Request.new(
+          comments: Faker::Lorem.paragraph,
+          partner: partner,
+          for_families: Faker::Boolean.boolean
+        )
+
+        item = Item.all.sample
+
+        item_request = Partners::ItemRequest.new(
+          name: Partners::Child::CHILD_ITEMS.sample,
+          quantity: Faker::Number.within(range: 10..30),
+          partner_key: item.partner_key,
+          item_id: item.id
+        )
+
+        pr.item_requests << item_request
+        pr.save!
+
+        Partners::ChildItemRequest.create!(
+          item_request: item_request,
+          child: child,
+          authorized_family_member: [nil, child.family.authorized_family_members.sample].sample
+        )
+      end
     end
   end
 

@@ -51,9 +51,9 @@
                   <th scope="row"><%= link_to partner_request.id, partners_request_path(id: partner_request.id) %></th>
                   <td><%= partner_request.item_requests.map { |item| "#{item.quantity} of #{item.name}" }.join(", ") %></td>
                   <td>
-                    <% if partner_request.for_families? %>
-                      <%= link_to 'TODO', class: 'btn btn-sm btn-info' do %>
-                        <i class="fa fa-edit"></i> (TODO) Pickup Sheet
+                    <% if partner_request.child_item_requests.any? %>
+                      <%= link_to partners_request_pickup_sheet_path(request_id: partner_request.id), class: 'btn btn-sm btn-info' do %>
+                        <i class="fa fa-edit"></i> Pickup Sheet
                       <% end %>
                     <% end %>
                   </td>

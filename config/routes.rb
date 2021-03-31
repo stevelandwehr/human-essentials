@@ -33,7 +33,9 @@ Rails.application.routes.draw do
   get 'partners/dashboard' => 'partners/dashboards#show', as: :partner_user_root
   namespace :partners do
     resource :dashboard, only: [:show]
-    resources :requests, only: [:show, :new, :index, :create]
+    resources :requests, only: [:show, :new, :index, :create] do
+      resource :pickup_sheet, only: [:show], module: 'requests'
+    end
     resources :users, only: [:index, :new, :create]
     resource :profile, only: [:show, :edit, :update]
     resource :approval_request, only: [:create]
