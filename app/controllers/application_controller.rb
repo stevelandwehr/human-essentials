@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include DateHelper
 
   protect_from_forgery with: :exception
+  before_action :redirect_to_new_staging_host
   before_action :authenticate_user!
   before_action :authorize_user
   before_action :log_active_user
@@ -95,5 +96,11 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+  end
+
+  def redirect_to_new_staging_host
+    return if Rails.env.production?
+
+    redirect_to "http://staging.humanessentials.app"
   end
 end
