@@ -102,5 +102,6 @@ class ApplicationController < ActionController::Base
     return if Rails.env.production?
 
     redirect_to "http://staging.humanessentials.app"
+    return
   end
 end
