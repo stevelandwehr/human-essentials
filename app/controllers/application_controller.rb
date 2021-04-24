@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   include DateHelper
 
   protect_from_forgery with: :exception
+
+  before_action :redirect_to_human_essentials
+  def redirect_to_human_essentials
+    redirect_to "https://www.humanessentials.app/"
+  end
+
   before_action :authenticate_user!
   before_action :authorize_user
   before_action :log_active_user
