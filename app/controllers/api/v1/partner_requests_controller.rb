@@ -1,5 +1,6 @@
 # Creates the primary channel through which Partners submit requests, which occurs via the API
 class API::V1::PartnerRequestsController < ApplicationController
+  skip_before_action :redirect_to_human_essentials
   skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_user!
   skip_before_action :authorize_user

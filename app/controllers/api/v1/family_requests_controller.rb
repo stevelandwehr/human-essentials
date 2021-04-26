@@ -2,6 +2,7 @@
 # the Partner indicates who is in the family, and then the organization determines (automatically, through the
 # Magic of Technology(TM)) how much inventory should be dispensed to that family, via that Partner.
 class API::V1::FamilyRequestsController < ApplicationController
+  skip_before_action :redirect_to_human_essentials
   skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_user!
   skip_before_action :authorize_user
