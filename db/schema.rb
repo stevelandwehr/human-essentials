@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_517_000_207) do
+ActiveRecord::Schema.define(version: 20_210_626_170_605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -223,6 +223,15 @@ ActiveRecord::Schema.define(version: 20_210_517_000_207) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "item_categories", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index %w(name organization_id), name: "index_item_categories_on_name_and_organization_id", unique: true
+  end
+
   create_table "items", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "category"
@@ -239,6 +248,7 @@ ActiveRecord::Schema.define(version: 20_210_517_000_207) do
     t.integer "on_hand_recommended_quantity"
     t.boolean "visible_to_partners", default: true, null: false
     t.integer "kit_id"
+    t.integer "item_category_id"
     t.index ["kit_id"], name: "index_items_on_kit_id"
     t.index ["organization_id"], name: "index_items_on_organization_id"
     t.index ["partner_key"], name: "index_items_on_partner_key"
@@ -429,6 +439,8 @@ ActiveRecord::Schema.define(version: 20_210_517_000_207) do
   add_foreign_key "donations", "diaper_drives"
   add_foreign_key "donations", "manufacturers"
   add_foreign_key "donations", "storage_locations"
+  add_foreign_key "item_categories", "organizations"
+  add_foreign_key "items", "item_categories"
   add_foreign_key "items", "kits"
   add_foreign_key "kits", "organizations"
   add_foreign_key "manufacturers", "organizations"
