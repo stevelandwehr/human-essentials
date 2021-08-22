@@ -8,6 +8,12 @@ Rails.application.configure do
     Bullet.add_footer    = true
   end
 
+  # ViewComponent configurations
+  config.view_component.default_preview_layout = "view_component_previews"
+  config.view_component.show_previews = true
+  config.view_component.show_previews_source = true
+  config.view_component.preview_paths << "#{Rails.root}/lib/component_previews"
+
   # Verifies that versions and hashed value of the package contents in the project's package.json
   config.webpacker.check_yarn_integrity = true
   # Settings specified here will take precedence over those in config/application.rb.

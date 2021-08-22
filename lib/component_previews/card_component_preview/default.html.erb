@@ -1,0 +1,13 @@
+<%= render(CardComponent.new(title: Faker::Lorem.word, subtitle: Faker::Lorem.sentence(1))) do |c| %>
+  <% c.body do %>
+    <p class='text-blue-300'>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+    </p>
+  <% end %>
+
+  <% c.footer do %>
+    <a class="bg-blue-500 shadow-md text-sm text-white font-bold py-3 md:px-8 px-4 hover:bg-blue-400 rounded uppercase" href="#">
+      Click Me
+    </a>
+  <% end %>
+<% end %>

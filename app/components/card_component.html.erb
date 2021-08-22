@@ -1,0 +1,24 @@
+<!-- light mode -->
+<div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
+  <div class="overflow-hidden shadow-md">
+    <!-- card header -->
+    <div class="px-6 py-4 text-2xl bg-white border-b border-gray-200 font-bold uppercase">
+      <%= @title %>
+      <% if @subtitle %>
+        <div class='text-xs font-light'>
+          <%= @subtitle %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- card body -->
+    <div class="p-6 bg-white border-b border-gray-200">
+      <%= body %>
+    </div>
+
+    <!-- card footer -->
+    <div class="p-6 bg-white border-gray-200 text-right">
+      <%= footer %>
+    </div>
+  </div>
+</div>

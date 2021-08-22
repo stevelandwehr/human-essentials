@@ -32,5 +32,6 @@ module Diaper
     # sidekiq worker that is only taking work from the `default`
     # queue.
     config.action_mailer.deliver_later_queue_name = 'default'
+    config.generators.test_framework = :rspec
   end
 end
