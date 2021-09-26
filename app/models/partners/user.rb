@@ -30,6 +30,7 @@ module Partners
   class User < Base
     self.table_name = "users"
 
+    # If you change any of these options, adjust Users::LookupsController::DeviseMappingShunt accordingly
     devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :invitable, :trackable
 
     has_many :requests, class_name: 'Partners::Request', foreign_key: :partner_id, dependent: :destroy, inverse_of: :user
