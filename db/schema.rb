@@ -160,8 +160,8 @@ ActiveRecord::Schema.define(version: 2021_09_26_131330) do
     t.integer "organization_id"
     t.datetime "issued_at"
     t.string "agency_rep"
-    t.integer "state", default: 5, null: false
     t.boolean "reminder_email_enabled", default: false, null: false
+    t.integer "state", default: 5, null: false
     t.integer "delivery_method", default: 0, null: false
     t.index ["organization_id"], name: "index_distributions_on_organization_id"
     t.index ["partner_id"], name: "index_distributions_on_partner_id"
@@ -293,6 +293,15 @@ ActiveRecord::Schema.define(version: 2021_09_26_131330) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_manufacturers_on_organization_id"
+  end
+
+  create_table "organization_faqs", force: :cascade do |t|
+    t.bigint "organization_id"
+    t.string "question"
+    t.string "answer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_organization_faqs_on_organization_id"
   end
 
   create_table "organizations", id: :serial, force: :cascade do |t|
@@ -432,7 +441,7 @@ ActiveRecord::Schema.define(version: 2021_09_26_131330) do
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
-    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -479,6 +488,7 @@ ActiveRecord::Schema.define(version: 2021_09_26_131330) do
   add_foreign_key "items", "kits"
   add_foreign_key "kits", "organizations"
   add_foreign_key "manufacturers", "organizations"
+  add_foreign_key "organization_faqs", "organizations"
   add_foreign_key "organizations", "account_requests"
   add_foreign_key "partner_groups", "organizations"
   add_foreign_key "requests", "distributions"

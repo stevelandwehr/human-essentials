@@ -28,6 +28,7 @@ RSpec.describe Organization, type: :model do
   let(:organization) { create(:organization) }
   context "Associations >" do
     it { should have_many(:item_categories) }
+    it { should have_many(:organization_faqs) }
     describe "barcode_items" do
       before do
         BarcodeItem.delete_all
