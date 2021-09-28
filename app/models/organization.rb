@@ -90,6 +90,9 @@ class Organization < ApplicationRecord
     end
   end
 
+  has_many :organization_faqs, dependent: :destroy
+  accepts_nested_attributes_for :organization_faqs, reject_if: :all_blank, allow_destroy: true
+
   before_update :sync_visible_partner_form_sections, if: :partner_form_fields_changed?
 
   ALL_PARTIALS = [

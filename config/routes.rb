@@ -194,9 +194,9 @@ Rails.application.routes.draw do
   end
 
   resources :attachments, only: %i(destroy)
+  resources :help
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get "help", to: "help#show"
   get "pages/:name", to: "static#page"
   get "/register", to: "static#register"
   resources :account_requests, only: [:new, :create] do
