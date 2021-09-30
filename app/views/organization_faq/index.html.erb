@@ -1,0 +1,40 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <!-- Default box -->
+        <div class="card card-info">
+          <div class="card-header">
+            <h2 class="card-title">Frequently Asked Questions</h2>
+          </div>
+       
+            <table class="faq">
+              <% @current_org_faq.each do |faq|%>
+                <tr><th><li style= "background-color: #f2e6ff;"><%= faq.question %></li></th></tr>
+                <tr><td style= "padding: 20px;"><%= faq.answer %>
+                <% if current_user.organization_admin? %>
+                  <br><br><u><%= link_to "Remove this Question & Answer", faq, method: :delete, data: { confirm: 'Are you sure?' } %></u>
+                <%end%>
+                </td></tr>
+              <%end%>
+              <tr><th><li style= "background-color: #f2e6ff;">Have suggestions to help improve the app or other questions about the app? Please <a href="https://human-essential.slack.com/archives/CG1NL2MRC"><u>reach out on Slack.</u></a></li></th></tr>
+              <tr><th><li style= "background-color: #f2e6ff;">Not a member of the Human Essentials Slack group? <a href="https://join.slack.com/t/human-essential/shared_invite/zt-bfa8tymd-d8Ks3Mq000COcRe~nfs~zg"><u>Request a login.</u></a></li></th></tr>
+              <tr><th><li style= "background-color: #f2e6ff;">Still need help? Submit a support ticket <u><%= link_to 'here', support_ticket_form_url, target: '_blank' %></u> and we will do our best to follow up with you via email.</li></th></tr>
+              <% if current_user.organization_admin? %>
+                <tr><th><li style= "background-color: #f2e6ff;">Have additional frequently asked questions to add to this page? Please complete the below:</li></th></tr>
+                  <tr><td style= "padding: 20px;"><%= form_for :organization_faq do |f| %>
+                    <%= f.hidden_field :organization_id, :value => @current_organization.id %>
+                    <%= f.text_field :question, placeholder: "Your question..." %><br>
+                    <%= f.text_field :answer, placeholder: "Your answer..." %><br>
+                    <%= f.submit "Save"%> <br>
+                    <%= link_to  "Cancel", "", data: {action: "click->nested-form#remove_association"} %>
+                    <%= f.hidden_field :_destroy %>
+                  <% end %></tr></td>
+              <% end %>
+              </table>
+          </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</section>

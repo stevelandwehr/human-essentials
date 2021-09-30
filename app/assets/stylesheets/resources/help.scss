@@ -4,6 +4,11 @@ ul.faq-list{
   padding: 10px;
 }
 
+table.faq, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
 li#help{
   white-space: nowrap;
 }

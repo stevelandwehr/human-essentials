@@ -194,7 +194,7 @@ Rails.application.routes.draw do
   end
 
   resources :attachments, only: %i(destroy)
-  resources :help
+  resources :organization_faq
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get "pages/:name", to: "static#page"

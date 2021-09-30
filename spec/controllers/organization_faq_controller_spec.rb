@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe HelpController, type: :controller do
+RSpec.describe OrganizationFaqController, type: :controller do
   let(:default_params) do
     { organization_id: @organization.to_param }
   end
@@ -37,6 +37,15 @@ RSpec.describe HelpController, type: :controller do
       it "renders with a flash notice" do
         expect(subject).to have_http_status(:found)
         expect(flash[:notice]).to eq("FAQ successfully added")
+      end
+    end
+
+    describe "DELETE #destroy" do
+      let(:faq) { create(:organization_faq, organization: @organization) }
+      subject { delete :destroy, params: default_params.merge(id: faq.id) }
+      it "renders with a flash notice" do
+        expect(subject).to redirect_to(organization_faq_index_path)
+        expect(flash[:notice]).to eq("FAQ successfully deleted")
       end
     end
   end
