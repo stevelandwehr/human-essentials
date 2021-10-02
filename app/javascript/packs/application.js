@@ -15,4 +15,8 @@ require("highcharts/modules/offline-exporting")(Highcharts)
 require("highcharts/modules/map")(Highcharts)
 window.Highcharts = Highcharts;
 
+import '@hotwired/turbo-rails'
+
+import '../controllers'
+
 import "stylesheets/application.scss"

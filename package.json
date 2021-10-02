@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "@babel/core": "^7.5.5",
+    "@hotwired/stimulus": "^3.0.0",
+    "@hotwired/turbo-rails": "^7.0.1",
     "@rails/webpacker": "5.3.0",
     "actiontext": "https://github.com/rails/actiontext#archive",
     "babel-cli": "^6.26.0",

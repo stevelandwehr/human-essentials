@@ -54,6 +54,8 @@ gem 'webpacker', '~> 5.4'
 gem "yajl-ruby"
 gem "recaptcha"
 gem "paper_trail" # for tracking history of InventoryItem
+gem 'redis', '~> 4.0'
+gem 'hotwire-rails'
 
 group :production do
   gem 'lograge' # Reduce the noise of logs and include custom fields to it for easier access
