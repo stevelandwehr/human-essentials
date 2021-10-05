@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   get 'partners/dashboard' => 'partners/dashboards#show', as: :partner_user_root
   namespace :partners do
     resource :dashboard, only: [:show]
-    resource :help, only: [:show]
+    resource :faqs
     resources :requests, only: [:show, :new, :index, :create]
     resources :individuals_requests, only: [:new, :create]
     resources :family_requests, only: [:new, :create]

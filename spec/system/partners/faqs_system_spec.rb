@@ -1,4 +1,4 @@
-RSpec.describe "Help", type: :system do
+RSpec.describe "Faq", type: :system do
   let(:partner) { FactoryBot.create(:partner) }
   let(:partner_user) { partner.primary_partner_user }
 
@@ -9,7 +9,7 @@ RSpec.describe "Help", type: :system do
 
   describe "for partner users" do
     it "displays the help page" do
-      visit partners_help_path
+      visit partners_faqs_path
       expect(page).to have_text("Frequently Asked Questions")
     end
   end

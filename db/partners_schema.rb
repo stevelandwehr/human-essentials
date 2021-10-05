@@ -103,6 +103,15 @@ ActiveRecord::Schema.define(version: 2021_09_24_155700) do
     t.index ["partner_id"], name: "index_families_on_partner_id"
   end
 
+  create_table "faqs", force: :cascade do |t|
+    t.bigint "partner_id"
+    t.string "question"
+    t.string "answer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["partner_id"], name: "index_faqs_on_partner_id"
+  end
+
   create_table "flipper_features", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
@@ -274,6 +283,7 @@ ActiveRecord::Schema.define(version: 2021_09_24_155700) do
   add_foreign_key "child_item_requests", "item_requests"
   add_foreign_key "children", "families"
   add_foreign_key "families", "partners"
+  add_foreign_key "faqs", "partners"
   add_foreign_key "item_requests", "partner_requests"
   add_foreign_key "partner_requests", "users", column: "partner_user_id"
   add_foreign_key "users", "partners"

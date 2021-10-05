@@ -1,5 +1,5 @@
 module Partners
-  class HelpsController < BaseController
+  class FaqsController < BaseController
     layout 'partners/application'
 
     def show; end
