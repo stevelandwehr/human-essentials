@@ -12,5 +12,18 @@ RSpec.describe "Faq", type: :system do
       visit partners_faqs_path
       expect(page).to have_text("Frequently Asked Questions")
     end
+
+    it "can create a new FAQ pair" do
+      params = {
+        partners_faq: {
+          partner_id: partner.id,
+          question: "Some question",
+          answer: "Some answer"
+        }
+      }
+      subject = { post :create, params: params }
+      expect(subject).to have_http_status(:found)
+      expect(flash[:notice]).to eq("FAQ successfully added")
+    end
   end
 end

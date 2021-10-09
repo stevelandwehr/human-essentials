@@ -91,6 +91,7 @@ module Partners
     has_many :users, dependent: :destroy
     has_many :requests, dependent: :destroy
     has_many :families, dependent: :destroy
+    has_many :faqs, dependent: :destroy
     has_many :children, through: :families
     has_many :authorized_family_members, through: :families
     has_one :partner_form, primary_key: :diaper_bank_id, foreign_key: :diaper_bank_id, dependent: :destroy, inverse_of: :partner

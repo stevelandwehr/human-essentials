@@ -156,7 +156,9 @@ class PartnersController < ApplicationController
   private
 
   def partner_params
-    params.require(:partner).permit(:name, :email, :send_reminders, :quota, :notes, :partner_group_id, documents: [])
+    params.require(:partner).permit(:name, :email, :send_reminders, :quota, :notes, :partner_group_id, 
+                                    documents: [],
+                                    faqs_attributes: [:id, :question, :answer, :_destroy])
   end
 
   helper_method \

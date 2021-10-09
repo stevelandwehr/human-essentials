@@ -30,9 +30,10 @@ Rails.application.routes.draw do
 
   # Add route partners/dashboard so that we can define it as partner_user_root
   get 'partners/dashboard' => 'partners/dashboards#show', as: :partner_user_root
+  get 'partners/faqs' => 'partners/faqs#index'
   namespace :partners do
     resource :dashboard, only: [:show]
-    resource :faqs
+    resource :faqs, only: [:index, :create, :new, :destroy]
     resources :requests, only: [:show, :new, :index, :create]
     resources :individuals_requests, only: [:new, :create]
     resources :family_requests, only: [:new, :create]
